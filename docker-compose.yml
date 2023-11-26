@@ -1,0 +1,10 @@
+version: '2'
+services:
+    flask:
+        build: .
+        container_name: stutern
+        ports:
+            - "5000:5000"
+        environment:
+            - PYTHONUNBUFFERED=1
+            - FLASK_ENV=development
