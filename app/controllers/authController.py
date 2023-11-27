@@ -27,9 +27,13 @@ class AuthController:
     def register_user(self, request_data):
         try:
             data_dict = {}
+            filter_query = {"$and": [{"parentEmail": request_data['parentEmail']}, {'childFirstName': request_data['childFirstName']}, {'childLastName': request_data['childLastName']}]}
             
             if self.authService.validate_email(request_data['parentEmail']) == False:
                 return Error(f"parent's ${request_data['email']} is not a valid email address").result(), 400
+
+            if self.userService.find(filter_query)['status']:
+                return Error('Already existing user. Please login.').result(), 403
 
             parental_consent = request_data['consentGiven']
 
@@ -38,7 +42,6 @@ class AuthController:
             parental_consent = True
             print("1 generated")
             
-            uid = str(uuid.uuid4())
             pwd = request_data['password']
             hashed_password = self.authService.hashPassword(pwd)
             print("2 generated")
