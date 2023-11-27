@@ -13,7 +13,7 @@ CONFIG_FILE = 'config.py'
 FlaskApp = FlaskApplication(app, CONFIG_FILE)
 
 #Static routes
-FlaskApp.add_endpoint('/', lambda : render_template('notification.html', title = 'Jummie', heading = 'Welcome to JUMMIE!', message = 'We cannot wait for you to have the JUMMIE experience 🥳🥳🥳🥳🥳🥳'))
+FlaskApp.add_endpoint('/', lambda : "Server ok")
 FlaskApp.add_endpoint('/auth/signin', auth.login, methods=["POST"])
 FlaskApp.add_endpoint('/auth/signup', auth.register_user, methods=['POST'])
 
