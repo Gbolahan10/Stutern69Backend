@@ -50,7 +50,7 @@ def verify_authentication(f):
         try:
             response = jwt.decode(token, TOKEN_SECRET_KEY, algorithms=['HS256'])
             
-            current_user = users.find_one({"user_id": response['user_id']}, {'_id': False, 'password': False})
+            current_user = users.find_one({"_id": response['user_id']}, {'password': False})
             
             if current_user == None:
                 return Error("Invalid Authentication token!").result(), 401
@@ -58,9 +58,6 @@ def verify_authentication(f):
             exp_time = datetime.fromtimestamp(response['exp'])
             if datetime.now() > exp_time:
                 return jsonify({"message":'Authorization Token is expired'}),401
-
-            if current_user["verified_email"]== False:
-                return Error("User hasn't verified email, therefore restricted.").result(), 401
         except Exception as e:
             return Error(f"Invalid Authentication token! - {e}").result(), 500
 
