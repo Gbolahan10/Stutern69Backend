@@ -16,7 +16,7 @@ RUN pip install waitress
 RUN pip install bcrypt
 RUN pip install Jinja2
 
-ENV PAYSTACK_PUBLIC_KEY=pk_test_fb6f5df6c0111eec62378cf2baddc05efe3bae7d
+ENV PAYSTACK_PUBLIC_KEY=pk_test_b9656dbed1160ad379217c0ef5f9f972d6d162fa
 ENV DATABASE_URI=mongodb+srv://gbolahan2454:IWGDW7gvIcteCvOk@cluster0.mcqnmyz.mongodb.net/stutern69?retryWrites=true&w=majority
 
 ADD app/* .
